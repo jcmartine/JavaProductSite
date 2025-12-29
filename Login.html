@@ -15,9 +15,14 @@
     <nav class="bg-gray-800 text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
             <div><a href="index.html" class="text-3xl font-bold hover:text-gray-300">International Foods LLC</a></div>
-            <ul class="flex space-x-4">
+            <button id="nav-toggle" class="md:hidden text-white focus:outline-none" aria-label="Toggle navigation">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+            <ul id="nav-menu" class="hidden md:flex space-x-4 items-center">
                 <li><a href="Index.html" class="hover:text-gray-300">Home</a></li>
                 <li><a href="Products.html" class="hover:text-gray-300">Products</a></li>
+                <li><a href="Cart.html" class="hover:text-gray-300">Cart (<span id="cart-count">0</span>)</a></li>
+                <li><a href="Register.html" class="hover:text-gray-300">Register</a></li>
                 <li id="auth-button"></li>
             </ul>
         </div>
@@ -41,8 +46,8 @@
 
     <form id="loginForm" class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
         <div class="mb-4">
-            <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
-            <input type="email" id="email" name="email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <label for="username" class="block text-gray-700 font-bold mb-2">Username</label>
+            <input type="text" id="username" name="username" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
         </div> 
         <div class="mb-6">
             <label for="password" class="block text-gray-700 font-bold mb-2">Password</label>
@@ -65,23 +70,30 @@
             const authButton = document.getElementById('auth-button');
             const regLink = document.querySelector('a[href="Register.html"]');
             const regLi = regLink ? regLink.closest('li') : null;
+            const cartLink = document.querySelector('a[href="Cart.html"]');
+            const cartLi = cartLink ? cartLink.closest('li') : null;
             const user = getUser();
-            if (user) {
+                if (user) {
                 if (regLi) regLi.style.display = 'none';
+                if (cartLi) cartLi.style.display = '';
                 const displayName = user.email || user.username || '';
-                authButton.innerHTML = `<span class="text-gray-300 mr-2">${displayName}</span><a href="#" id="logout-link" class="hover:text-gray-300">Logout</a>`;
+                authButton.innerHTML = `<span class="text-gray-300 mr-2 max-w-[140px] truncate inline-block" title="${displayName}">${displayName}</span><a href="#" id="logout-link" class="hover:text-gray-300">Logout</a>`;
                 document.getElementById('logout-link').addEventListener('click', function(e) {
                     e.preventDefault();
                     logout();
                 });
             } else {
                 if (regLi) regLi.style.display = '';
+                if (cartLi) cartLi.style.display = 'none';
                 authButton.innerHTML = '<a href="Login.html" class="hover:text-gray-300">Login</a>';
             }
         }
         document.addEventListener('DOMContentLoaded', renderAuthButton);
 
     </script>
+
+    <script src="JS/Cart.js"></script>
+    <script src="JS/nav.js"></script>
 
 </body>
 </html>

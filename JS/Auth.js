@@ -1,22 +1,23 @@
 // login
 function login() {
-  const email = document.getElementById("email").value;
+  const email = document.getElementById("username").value;
   const password = document.getElementById("password").value;
   
   // Validate inputs
-  if(!email || !password) {
-    alert("Please enter email and password.");
-    return;
-  }
+    const username = document.getElementById("username").value.trim();
+    if (!username || !password) {
+      alert("Please enter username and password.");
+      return;
+    }
   
   console.log(`Logging in with email: ${email}`);
   
     // admin backdoor
-    if (email === "admin@example.com" && password === "password") {
-    setUser({ email });
+      if (username === "admin" && password === "password") {
+      setUser({ username: 'admin' });
     alert("Login successful!");
     // Clear form
-    document.getElementById("email").value = "";
+      document.getElementById("username").value = "";
     document.getElementById("password").value = "";
     // Redirect to products page
     window.location.href = "Products.html";
@@ -25,11 +26,11 @@ function login() {
 
     // check stored users
     const users = getUsers();
-    const found = users.find(u => u.email === email && u.password === password);
+    const found = users.find(u => u.username === username && u.password === password);
     if (found) {
       setUser({ username: found.username, email: found.email });
       alert('Login successful!');
-      document.getElementById("email").value = "";
+        document.getElementById("username").value = "";
       document.getElementById("password").value = "";
       window.location.href = "Products.html";
     } else {

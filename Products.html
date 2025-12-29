@@ -12,12 +12,16 @@
     <nav class="bg-gray-800 text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
             <div><a href="index.html" class="text-3xl font-bold hover:text-gray-300">International Foods LLC</a></div>
-            <ul class="flex space-x-4">
-                <li><a href="Index.html" class="hover:text-gray-300">Home</a></li>
-                <li><a href="Products.html" class="hover:text-gray-300">Products</a></li>
-                <li><a href="Register.html" class="hover:text-gray-300">Register</a></li>
-                <li id="auth-button"></li>
-            </ul>
+                <button id="nav-toggle" class="md:hidden text-white focus:outline-none" aria-label="Toggle navigation">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <ul id="nav-menu" class="hidden md:flex space-x-4 items-center">
+                    <li><a href="Index.html" class="hover:text-gray-300">Home</a></li>
+                    <li><a href="Products.html" class="hover:text-gray-300">Products</a></li>
+                    <li><a href="Cart.html" class="hover:text-gray-300">Cart (<span id="cart-count">0</span>)</a></li>
+                    <li><a href="Register.html" class="hover:text-gray-300">Register</a></li>
+                    <li id="auth-button"></li>
+                </ul>
         </div>
     </nav>
 </header>
@@ -30,31 +34,39 @@
         </div>
 </main>
 
-<!-- SCRIPTS -->
- <script src="/JS/Products.js"></script>
+ <!-- SCRIPTS -->
+    <script src="JS/Cart.js"></script>
+    <script src="/JS/Products.js"></script>
 
 <script src="JS/Auth.js"></script>
+<script src="JS/Cart.js"></script>
 <script>
     function renderAuthButton() {
         const authButton = document.getElementById('auth-button');
         const regLink = document.querySelector('a[href="Register.html"]');
         const regLi = regLink ? regLink.closest('li') : null;
+        const cartLink = document.querySelector('a[href="Cart.html"]');
+        const cartLi = cartLink ? cartLink.closest('li') : null;
         const user = getUser();
-        if (user) {
+            if (user) {
             if (regLi) regLi.style.display = 'none';
+            if (cartLi) cartLi.style.display = '';
             const displayName = user.email || user.username || '';
-            authButton.innerHTML = `<span class="text-gray-300 mr-2">${displayName}</span><a href="#" id="logout-link" class="hover:text-gray-300">Logout</a>`;
+            authButton.innerHTML = `<span class="text-gray-300 mr-2 max-w-[140px] truncate inline-block" title="${displayName}">${displayName}</span><a href="#" id="logout-link" class="hover:text-gray-300">Logout</a>`;
             document.getElementById('logout-link').addEventListener('click', function(e) {
                 e.preventDefault();
                 logout();
             });
         } else {
             if (regLi) regLi.style.display = '';
+            if (cartLi) cartLi.style.display = 'none';
             authButton.innerHTML = '<a href="Login.html" class="hover:text-gray-300">Login</a>';
         }
     }
     document.addEventListener('DOMContentLoaded', renderAuthButton);
 </script>
+
+<script src="JS/nav.js"></script>
 
 <footer class="bg-gray-800 text-white p-4 mt-8">
     <div class="container mx-auto text-center">

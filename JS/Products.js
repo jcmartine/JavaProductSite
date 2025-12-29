@@ -77,13 +77,26 @@ function displayProducts() {
           <span class="text-yellow-500 font-semibold">${product.rating}★</span>
           <span class="text-gray-500 text-sm ml-2">(${product.reviews} reviews)</span>
         </div>
-        <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+        <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded add-to-cart-btn" data-id="${product.id}">
           Add to Cart
         </button>
       </div>
     `;
     
     productGrid.appendChild(productCard);
+    // attach click handler
+    const btn = productCard.querySelector('.add-to-cart-btn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        if (typeof addToCart === 'function') {
+          const ok = addToCart(product.id, 1);
+          if (ok) alert(product.name + ' added to cart');
+          // if not ok, addToCart already redirected to login
+        } else {
+          console.warn('Cart functions not loaded');
+        }
+      });
+    }
   });
 }
 
