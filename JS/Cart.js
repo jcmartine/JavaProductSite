@@ -81,7 +81,7 @@ function checkout() {
   const ok = confirm(`Proceed to checkout — total $${total.toFixed(2)}?`);
   if (!ok) return;
 
-  // In a real app we'd call a backend here. For this demo, clear the cart and show success.
+  // Payment message simulation
   clearCart();
   updateCartCount();
   renderCartPage();
@@ -89,7 +89,7 @@ function checkout() {
   window.location.href = 'Index.html';
 }
 
-// Render cart page (Cart.html should include Products.js then Cart.js)
+// Render cart page (Cart.html should include Products.js then Cart.js) - AI
 function renderCartPage() {
   const container = document.getElementById('cart-items');
   const totalEl = document.getElementById('cart-total');
@@ -148,7 +148,7 @@ function renderCartPage() {
   totalEl.textContent = '$' + getTotal(products).toFixed(2);
 }
 
-// Expose functions globally
+// Global functions
 window.getCart = getCart;
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;

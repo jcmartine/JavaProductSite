@@ -30,7 +30,7 @@ const products = [
     reviews: 1200,
     stock: 24,
     badge: "Bestseller",
-    description: "Authentic Italian cuisine ingredients for a delicious meal."
+    description: "Spaghetti and meatballs with authentic Italian ingredients."
   },
   {   
     id: 4,
@@ -41,7 +41,7 @@ const products = [
     reviews: 1200,
     stock: 24,
     badge: "Bestseller",
-    description: "Authentic Chinese cuisine ingredients for a delicious meal."   
+    description: "Orange chicken with white rice."   
   },
   {
     id: 5,
@@ -52,7 +52,7 @@ const products = [
     reviews: 1200,
     stock: 24,
     badge: "Bestseller",
-    description: "Authentic Japanese cuisine ingredients for a delicious meal."
+    description: "Sushi rolls with fresh fish and rice."
   }
 ];
 

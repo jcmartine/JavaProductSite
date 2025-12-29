@@ -24,7 +24,7 @@ function login() {
       return;
     }
 
-    // check stored users
+    // check stored users - AI
     const users = getUsers();
     const found = users.find(u => u.username === username && u.password === password);
     if (found) {
@@ -48,7 +48,7 @@ function login() {
     return user ? JSON.parse(user) : null;
     }
 
-    // Logout script
+    // Logout script AI
     function logout() {
     localStorage.removeItem("user");
     window.location.href = "Index.html";
@@ -63,7 +63,7 @@ function login() {
     function addUser(user) {
       const users = getUsers();
       if (users.some(u => u.email === user.email)) {
-        return false; // already exists
+        return false; 
       }
       users.push(user);
       localStorage.setItem('users', JSON.stringify(users));
